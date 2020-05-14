@@ -31,5 +31,5 @@ BEGIN
         END;
       INC(CurrNum)
     END;
-    WRITELN 
+  WRITELN 
 END.

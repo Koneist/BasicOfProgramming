@@ -9,7 +9,7 @@ VAR
   TFile, DateFile: FileOfDate;
   FInput: TEXT;
  
-BEGIN{SortDate}
+BEGIN {SortDate}
   ASSIGN(DateFile, 'DF.DAT');
   ASSIGN(TFile, 'TF.DAT');
   ASSIGN(FInput, 'FI.TXT');
@@ -57,5 +57,5 @@ BEGIN{SortDate}
     {Копируем DateFile в OUTPUT}
      RESET(DateFile);
      CopyOut(DateFile);
-END.{SortDate}
+END. {SortDate}
 

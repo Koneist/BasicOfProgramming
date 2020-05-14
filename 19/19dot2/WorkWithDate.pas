@@ -19,23 +19,23 @@ TYPE
 IMPLEMENTATION
   PROCEDURE WriteDate(VAR FOut: TEXT; VAR Result: Date);
   {Result.Mo = MMM, Result.Day = DD => 'MMM DD' }
-  BEGIN{WriteDate}
+  BEGIN {WriteDate}
     WriteMonth(FOut, Result.Mo);
     WRITE(FOut, Result.Day : 3)
-  END;{WriteDate}
+  END; {WriteDate}
  
   PROCEDURE ReadDate (VAR FIn: TEXT; VAR Result: Date);
   {'MMM/ +/DD' => Result.Mo = MMM, Result.Day = DD }
-  BEGIN{ReadDate}
+  BEGIN {ReadDate}
     ReadMonth(FIn, Result.Mo);
     READ(FIn, Result.Day)
-  END;{ReadDate}
+  END; {ReadDate}
  
   PROCEDURE ReadMonth(VAR FIn: TEXT; VAR Mo: Month);
   {'MMM/ +/DD' => Result.Mo = MMM}
   VAR
     Ch1, Ch2, Ch3: CHAR;
-  BEGIN{ReadMonth}
+  BEGIN {ReadMonth}
     READ(FIn, Ch1, Ch2, Ch3);
     IF (Ch1 = 'J') AND (Ch2 = 'A') AND (Ch3 = 'N') THEN Mo := Jan ELSE
     IF (Ch1 = 'F') AND (Ch2 = 'E') AND (Ch3 = 'B') THEN Mo := Feb ELSE
@@ -50,7 +50,7 @@ IMPLEMENTATION
     IF (Ch1 = 'N') AND (Ch2 = 'O') AND (Ch3 = 'V') THEN Mo := Nov ELSE
     IF (Ch1 = 'D') AND (Ch2 = 'E') AND (Ch3 = 'C') THEN Mo := Dec
       ELSE Mo := NoMonth
-  END;{ReadMonth}
+  END; {ReadMonth}
  
   PROCEDURE WriteMonth(VAR FOut: TEXT; VAR Mo: Month);
   {Result.Mo = MMM => 'MMM'}
@@ -97,19 +97,19 @@ IMPLEMENTATION
         WriteDate(OUTPUT, VarDate);
         WRITELN(OUTPUT)
       END
-  END;{CopyOut}
+  END; {CopyOut}
 
   PROCEDURE CopyDate(VAR DFile1, DFile2: FileOfDate);
   VAR
     VDate: Date;
-  BEGIN
+  BEGIN {CopyDate}
     WHILE NOT EOF(DFile1)
     DO
       BEGIN
         READ(DFile1, VDate);
         WRITE(DFile2, VDate)
       END;
-  END;
+  END; {CopyDate}
   
 BEGIN
 END.
