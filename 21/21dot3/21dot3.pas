@@ -37,13 +37,13 @@ BEGIN {Initialize}
           Ch2 := Ch3;
           READ(CodeTxt, Ch3)
         END; 
-      IF (Ch1 IN Sieve) AND (Ch2 = '=') AND NOT(Ch3 IN UsedChar) 
+      IF (Ch1 IN Sieve) AND (Ch2 = '=') AND NOT (Ch3 IN UsedChar) 
       THEN
         BEGIN
           Code[Ch1] := Ch3;
           UsedChar := UsedChar + [Ch3]
         END 
-        ELSE
+      ELSE
         IF (Ch1 IN Sieve) AND (Ch3 IN UsedChar)
         THEN
           BEGIN
@@ -61,7 +61,7 @@ BEGIN {Initialize}
             END; 
       READLN(CodeTxt);
     END;
-END;  {Initialize}
+END; {Initialize}
  
 PROCEDURE Decode(VAR S: Str; VAR CurrStrLen: StrLen);
 {Выводит символы из S, соответствующие символам-индексам из Code}
@@ -87,7 +87,7 @@ BEGIN {Decode}
       ELSE
         WRITE(S[Index]);
   WRITELN
-END;  {Decode}
+END; {Decode}
  
 BEGIN {Decryption}
   ASSIGN(ChiperTxt, 'Cipher.txt');
@@ -111,4 +111,4 @@ BEGIN {Decryption}
       Decode(Msg, I);
       I := 0
     END
-END.  {Decryption}
+END. {Decryption}

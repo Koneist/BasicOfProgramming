@@ -1,14 +1,11 @@
 PROGRAM SortDate(INPUT, OUTPUT);
-
 USES
   WorkWithDate;
-
 VAR
   Copying: BOOLEAN;
   D, VarDate: Date;
   TFile, DateFile: FileOfDate;
-  FInput: TEXT;
- 
+  FInput: TEXT; 
 BEGIN {SortDate}
   ASSIGN(DateFile, 'DF.DAT');
   ASSIGN(TFile, 'TF.DAT');

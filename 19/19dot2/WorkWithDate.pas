@@ -4,10 +4,10 @@ TYPE
   Month = (NoMonth, Jan, Feb, Mar, Apr, May, Jun,
                     Jul, Aug, Sep, Oct, Nov, Dec);
   DayNum = 1..31;
-  Date   = RECORD
-             Mo : Month;
-             Day: DayNum
-           END;
+  Date = RECORD
+           Mo : Month;
+           Day: DayNum
+         END;
   FileOfDate = FILE OF Date;
   PROCEDURE ReadDate(VAR FIn: TEXT; VAR Result: Date);{Считывает дату из файла}
   PROCEDURE WriteDate(VAR FOut: TEXT; VAR Result: Date);{Выводит дату в файл}

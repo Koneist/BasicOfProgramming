@@ -5,7 +5,7 @@ CONST
 VAR
   CurrNum, TempNum : INTEGER;
   Sieve: SET OF Min..Max;
-BEGIN
+BEGIN {Prime}
   Sieve := [Min..Max];
   CurrNum := Min;
   WHILE CurrNum <= Max
@@ -26,10 +26,10 @@ BEGIN
                   THEN
                     WRITE(CurrNum, ', ')
                 END;
-              INC(TempNum)
+              TempNum = TempNum + 1
             END  
         END;
-      INC(CurrNum)
+      CurrNum = CurrNum + 1
     END;
   WRITELN 
-END.
+END. {Prime}

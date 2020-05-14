@@ -5,7 +5,6 @@ PROCEDURE ReadDigit(VAR F: TEXT; VAR D: INTEGER);
 {—читывает текущий символ из файла, если он - цифра, возвращает его 
  преобразу€ в значение типа INTEGER. ≈сли считанный символ не цифра
  возвращает -1}
-
 VAR
   Ch: CHAR;
 BEGIN {ReadDigit}

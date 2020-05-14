@@ -38,13 +38,13 @@ BEGIN {Initialize}
           Ch2 := Ch3;
           READ(CodeTxt, Ch3)
         END; 
-      IF (Ch1 IN Sieve) AND (Ch2 = '=') AND NOT(Ch3 IN UsedChar) 
+      IF (Ch1 IN Sieve) AND (Ch2 = '=') AND NOT (Ch3 IN UsedChar) 
       THEN
         BEGIN
           Code[Ch1] := Ch3;
           UsedChar := UsedChar + [Ch3]
         END 
-        ELSE
+      ELSE
         IF (Ch1 IN Sieve) AND (Ch3 IN UsedChar)
         THEN
           BEGIN
@@ -59,8 +59,7 @@ BEGIN {Initialize}
             BEGIN
               Error := TRUE;
               WRITELN('Error: Invalid data format.') 
-            END; 
-          
+            END;     
       READLN(CodeTxt);
     END;
 END;  {Initialize}
