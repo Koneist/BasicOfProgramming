@@ -8,6 +8,7 @@ VAR
 BEGIN {Prime}
   Sieve := [Min..Max];
   CurrNum := Min;
+  WRITE('Prime numbers between ', Min, ' and ', Max, ': ');
   WHILE CurrNum * CurrNum <= Max
   DO
     BEGIN

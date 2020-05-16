@@ -49,6 +49,7 @@ PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen);
 VAR
   Index: StrLen;
 BEGIN {Encode}
+  WRITE('Your message in encrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
     IF S[Index] IN ['A' .. 'Z']

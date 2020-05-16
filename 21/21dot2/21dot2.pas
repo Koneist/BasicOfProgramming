@@ -69,6 +69,7 @@ PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen);
 VAR
   Index: StrLen;
 BEGIN {Encode}
+  WRITE('Your message in encrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
     IF S[Index] IN ['A' .. 'Z']
@@ -102,7 +103,7 @@ BEGIN {Encryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Decode(Msg, I);
+      Encode(Msg, I);
       I := 0
     END
 END.  {Encryption}

@@ -69,6 +69,7 @@ VAR
   Index: StrLen;
   IndexSymb: SymbArea; 
 BEGIN {Decode}
+  WRITE('Your message in decrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
     IF S[Index] IN UsedChar

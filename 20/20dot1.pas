@@ -1,7 +1,8 @@
 PROGRAM WriteSymbol(INPUT, OUTPUT);
 CONST
-  Min = 0;
+  Min = 1;
   Max = 25;
+  StrLen = 5;
 TYPE
   Matrix = SET OF Min..Max;
 VAR
@@ -48,18 +49,21 @@ VAR
 BEGIN
   IF (Symbol <> [])
   THEN
-    FOR Counter := Min TO Max
-    DO
-      BEGIN
-        IF (Counter IN Symbol)
-        THEN
-          WRITE('X')
-        ELSE
-          WRITE(' ');
-        IF (Counter MOD 5 = 0)
-        THEN
-          WRITELN
-      END
+    BEGIN
+    WRITELN('Your pseudo-graphic symbol is:');
+      FOR Counter := Min TO Max
+      DO
+        BEGIN
+          IF (Counter IN Symbol)
+          THEN
+            WRITE('X')
+          ELSE
+            WRITE(' ');
+          IF (Counter MOD StrLen = 0)
+          THEN
+            WRITELN
+        END
+    END
   ELSE
     WRITELN(Ch, ' is invalid symbol')  
 END;
