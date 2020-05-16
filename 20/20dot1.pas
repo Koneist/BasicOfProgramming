@@ -3,6 +3,8 @@ CONST
   Min = 1;
   Max = 25;
   StrLen = 5;
+  SymbForCrypt = 'X';
+  SymbForSpace = ' ';
 TYPE
   Matrix = SET OF Min..Max;
 VAR
@@ -56,9 +58,9 @@ BEGIN
         BEGIN
           IF (Counter IN Symbol)
           THEN
-            WRITE('X')
+            WRITE(SymbForCrypt)
           ELSE
-            WRITE(' ');
+            WRITE(SymbForSpace);
           IF (Counter MOD StrLen = 0)
           THEN
             WRITELN
