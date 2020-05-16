@@ -8,7 +8,7 @@ VAR
 BEGIN {Prime}
   Sieve := [Min..Max];
   CurrNum := Min;
-  WHILE CurrNum <= Max
+  WHILE CurrNum * CurrNum <= Max
   DO
     BEGIN
       IF CurrNum IN Sieve
@@ -18,18 +18,27 @@ BEGIN {Prime}
           WHILE TempNum <= Max
           DO
             BEGIN
-              IF (TempNum MOD CurrNum = 0) AND (TempNum IN Sieve)
+              IF (TempNum MOD CurrNum = 0)
               THEN
                 BEGIN
                   Sieve := Sieve - [TempNum];
                   IF TempNum DIV CurrNum = 1
                   THEN
-                    WRITE(CurrNum, ', ')
+                    WRITE(CurrNum, ' ')
                 END;
-              TempNum = TempNum + 1
+              TempNum := TempNum + CurrNum
             END  
         END;
-      CurrNum = CurrNum + 1
+      CurrNum := CurrNum + 1
     END;
-  WRITELN 
+  TempNum := Min;
+  WHILE TempNum <= Max
+  DO
+    BEGIN
+      IF TempNum IN Sieve
+      THEN
+        WRITE(TempNum, ' ');
+      TempNum := TempNum + 1
+    END;
+  WRITELN;
 END. {Prime}

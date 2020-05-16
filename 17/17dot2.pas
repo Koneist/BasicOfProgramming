@@ -1,6 +1,4 @@
 PROGRAM NumberProg(INPUT, OUTPUT);
-const
-  MAXINT = 32767;
 VAR
   Number: INTEGER;
 PROCEDURE ReadDigit(VAR F: TEXT; VAR D: INTEGER);
@@ -42,7 +40,7 @@ BEGIN {ReadNumber}
       ReadDigit(F, CurrDigit);  
       IF (CurrDigit <> -1) 
       THEN
-        IF (N < (MaxInt DIV 10)) OR ((N = (MaxInt DIV 10)) AND (CurrDigit <= (MaxInt MOD 10)))
+        IF (N < (MAXINT DIV 10)) OR ((N = (MAXINT DIV 10)) AND (CurrDigit <= (MAXINT MOD 10)))
         THEN
           N := N * 10 + CurrDigit
         ELSE
