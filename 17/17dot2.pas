@@ -34,6 +34,7 @@ VAR
   CurrDigit: INTEGER;
 BEGIN {ReadNumber}
   N := 0;
+  CurrDigit := 0;
   WHILE (CurrDigit <> -1)
   DO
     BEGIN

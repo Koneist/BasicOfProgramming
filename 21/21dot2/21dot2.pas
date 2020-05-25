@@ -1,13 +1,13 @@
-PROGRAM Encryption(INPUT, OUTPUT);
-{Переводит символы из INPUT в код согласно Chiper 
-  и печатает новые символы в OUTPUT}
+п»їPROGRAM Encryption(INPUT, OUTPUT);
+{РџРµСЂРµРІРѕРґРёС‚ СЃРёРјРІРѕР»С‹ РёР· INPUT РІ РєРѕРґ СЃРѕРіР»Р°СЃРЅРѕ Chiper 
+  Рё РїРµС‡Р°С‚Р°РµС‚ РЅРѕРІС‹Рµ СЃРёРјРІРѕР»С‹ РІ OUTPUT}
 CONST
   Len = 20;
+  SymbArea = ['A' .. 'Z', ' '];
 TYPE
   StrLen = 0 .. Len;
-  SymbArea = 'A' .. 'Z';
-  Str = ARRAY [StrLen] OF SymbArea;
-  Chiper = ARRAY [SymbArea] OF CHAR;
+  Str = ARRAY [StrLen] OF 'A' .. 'Z';
+  Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
   Code: Chiper;
@@ -16,21 +16,22 @@ VAR
   Error: BOOLEAN;
   SpaceChiper: CHAR;
 
-
-PROCEDURE Initialize(VAR Code: Chiper; VAR CodeTxt: TEXT; VAR SpaceSymb: CHAR);
-{Присвоить Code шифр замены}
+PROCEDURE Initialize(VAR Code: Chiper; VAR CodeTxt: TEXT; VAR Error: BOOLEAN);
+{РџСЂРёСЃРІРѕРёС‚СЊ Code С€РёС„СЂ Р·Р°РјРµРЅС‹}
 VAR
-  Sieve: SET OF SymbArea;
+  Sieve: SET OF ' '.. 'Z';
   UsedChar: SET OF CHAR;
   Ch1, Ch2, Ch3: CHAR; 
 BEGIN {Initialize}
-  Sieve := ['A' .. 'Z'];
+  Sieve := SymbArea;
   UsedChar := [];
-  SpaceSymb := ' ';
   RESET(CodeTxt);
   WHILE NOT EOF(CodeTxt)
   DO
     BEGIN
+      IF NOT EOLN(CodeTxt)
+      THEN
+      BEGIN
       WHILE NOT EOLN(CodeTxt)
       DO
         BEGIN
@@ -52,47 +53,40 @@ BEGIN {Initialize}
             WRITELN('Error: Multiple letters have the same cipher.') 
           END
         ELSE
-          IF Ch1 = ' '
-          THEN
-            SpaceSymb := Ch3
-          ELSE
-            BEGIN
-              Error := TRUE;
-              WRITELN('Error: Invalid data format.') 
-            END;     
-      READLN(CodeTxt);
+          BEGIN
+            Error := TRUE;
+            WRITELN('Error: Invalid data format.') 
+          END;
+      END;     
+      READLN(CodeTxt)
     END;
-END;  {Initialize}
+END; {Initialize}
  
-PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen);
-{Выводит символы из Code, соответствующие символам из S}
+PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen; VAR Error: BOOLEAN);
+{Р’С‹РІРѕРґРёС‚ СЃРёРјРІРѕР»С‹ РёР· Code, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ СЃРёРјРІРѕР»Р°Рј РёР· S}
 VAR
   Index: StrLen;
 BEGIN {Encode}
   WRITE('Your message in encrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
-    IF S[Index] IN ['A' .. 'Z']
+    IF S[Index] IN SymbArea 
     THEN
       WRITE(Code[S[Index]])
     ELSE
-      IF S[Index] = ' '
-      THEN
-        WRITE(SpaceChiper)
-      ELSE
-        WRITE(S[Index]);
+      WRITE(S[Index]);
   WRITELN
-END;  {Encode}
+END; {Encode}
  
 BEGIN {Encryption}
   ASSIGN(ChiperTxt, 'Cipher.txt');
   RESET(ChiperTxt);
-  {Инициализировать Code}
-  Initialize(Code, ChiperTxt, SpaceChiper);
-  WHILE NOT Error AND NOT EOF(INPUT)
+  {РРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ Code}
+  Initialize(Code, ChiperTxt, Error);
+  WHILE NOT Error AND NOT EOF
   DO
     BEGIN
-      {читать строку в Msg и распечатать ее}
+      {С‡РёС‚Р°С‚СЊ СЃС‚СЂРѕРєСѓ РІ Msg Рё СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ РµРµ}
       WHILE NOT EOLN AND (I < Len)
       DO
         BEGIN
@@ -103,11 +97,7 @@ BEGIN {Encryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Encode(Msg, I);
+      Encode(Msg, I, Error);
       I := 0
     END
-END.  {Encryption}
-
-
-
-
+END. {Encryption}

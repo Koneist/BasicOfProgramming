@@ -3,11 +3,11 @@ PROGRAM Encryption(INPUT, OUTPUT);
   и печатает новые символы в OUTPUT}
 CONST
   Len = 20;
+  SymbArea = ['A'..'Z', ' '];
 TYPE
   StrLen = 0 .. Len;
-  SymbArea = 'A' .. 'Z';
-  Str = ARRAY [StrLen] OF SymbArea;
-  Chiper = ARRAY [SymbArea] OF CHAR;
+  Str = ARRAY [StrLen] OF 'A' .. 'Z';
+  Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
   Code: Chiper;
@@ -16,7 +16,7 @@ VAR
 PROCEDURE Initialize(VAR Code: Chiper);
 {Присвоить Code шифр замены}
 BEGIN {Initialize}
-  Code['A'] := 'Z';
+  //Code['A'] := 'Z';
   Code['B'] := 'Y';
   Code['C'] := 'X';
   Code['D'] := '#';
@@ -42,9 +42,10 @@ BEGIN {Initialize}
   Code['X'] := 'C';
   Code['Y'] := 'B';
   Code['Z'] := 'A';
+  Code[' '] := '&'
 END;  {Initialize}
  
-PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen);
+PROCEDURE Encode(VAR S: Str; VAR Code: Chiper; VAR CurrStrLen: StrLen);
 {Выводит символы из Code, соответствующие символам из S}
 VAR
   Index: StrLen;
@@ -52,17 +53,13 @@ BEGIN {Encode}
   WRITE('Your message in encrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
-    IF S[Index] IN ['A' .. 'Z']
+    IF (S[Index] IN SymbArea) AND (Code[S[Index]] IN [' ' .. '~'])
     THEN
       WRITE(Code[S[Index]])
     ELSE
-      IF S[Index] = ' '
-      THEN
-        WRITE('?')
-      ELSE
-        WRITE(S[Index]);
+      WRITE(S[Index]);
   WRITELN
-END;  {Encode}
+END; {Encode}
  
 BEGIN {Encryption}
   {Инициализировать Code}
@@ -81,7 +78,7 @@ BEGIN {Encryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Encode(Msg, I);
+      Encode(Msg, Code, I);
       I := 0
     END
 END.  {Encryption}

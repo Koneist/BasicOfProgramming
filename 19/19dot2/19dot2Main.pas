@@ -55,4 +55,3 @@ BEGIN {SortDate}
      RESET(DateFile);
      CopyOut(DateFile);
 END. {SortDate}
-

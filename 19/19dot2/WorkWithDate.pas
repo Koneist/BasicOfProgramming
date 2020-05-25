@@ -36,7 +36,15 @@ IMPLEMENTATION
   VAR
     Ch1, Ch2, Ch3: CHAR;
   BEGIN {ReadMonth}
-    READ(FIn, Ch1, Ch2, Ch3);
+    IF NOT EOLN(FIn)
+    THEN
+      READ(FIn, Ch1);
+    IF NOT EOLN(FIn)
+    THEN
+      READ(FIn, Ch2);
+    IF NOT EOLN(FIn)
+    THEN
+      READ(FIn, Ch3);    
     IF (Ch1 = 'J') AND (Ch2 = 'A') AND (Ch3 = 'N') THEN Mo := Jan ELSE
     IF (Ch1 = 'F') AND (Ch2 = 'E') AND (Ch3 = 'B') THEN Mo := Feb ELSE
     IF (Ch1 = 'M') AND (Ch2 = 'A') AND (Ch3 = 'R') THEN Mo := Mar ELSE
