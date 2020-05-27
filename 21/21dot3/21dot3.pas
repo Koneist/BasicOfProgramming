@@ -1,104 +1,87 @@
 PROGRAM Decryption(INPUT, OUTPUT);
-{Переводит символы из INPUT в код согласно Chiper 
-  и печатает новые символы в OUTPUT}
 CONST
   Len = 20;
+  SymbArea = ['A' .. 'Z', ' '];
+  CodeArea = [' ' .. 'Z'];
 TYPE
   StrLen = 0 .. Len;
-  SymbArea = 'A' .. 'Z';
-  Str = ARRAY [StrLen] OF SymbArea;
-  Chiper = ARRAY [SymbArea] OF CHAR;
+  Str = ARRAY [StrLen] OF 'A' .. 'Z';
+  Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
   Code: Chiper;
   I: StrLen;
   ChiperTxt: TEXT;
   Error: BOOLEAN;
-  UsedChar: SET OF CHAR;
   SpaceChiper: CHAR;
 
-PROCEDURE Initialize(VAR Code: Chiper; VAR CodeTxt: TEXT; VAR SpaceSymb: CHAR);
-{Присвоить Code шифр замены}
+PROCEDURE Initialize(VAR Code: Chiper; VAR CodeTxt: TEXT; VAR Error: BOOLEAN);
 VAR
-  Sieve: SET OF SymbArea;
+  UsedChar: SET OF CHAR;
   Ch1, Ch2, Ch3: CHAR; 
 BEGIN {Initialize}
-  Sieve := ['A' .. 'Z'];
   UsedChar := [];
-  SpaceSymb := ' ';
   RESET(CodeTxt);
   WHILE NOT EOF(CodeTxt)
   DO
     BEGIN
-      WHILE NOT EOLN(CodeTxt)
-      DO
-        BEGIN
-          Ch1 := Ch2;
-          Ch2 := Ch3;
-          READ(CodeTxt, Ch3)
-        END; 
-      IF (Ch1 IN Sieve) AND (Ch2 = '=') AND NOT (Ch3 IN UsedChar) 
+      IF NOT EOLN(CodeTxt)
       THEN
         BEGIN
-          Code[Ch1] := Ch3;
-          UsedChar := UsedChar + [Ch3]
-        END 
-      ELSE
-        IF (Ch1 IN Sieve) AND (Ch3 IN UsedChar)
-        THEN
-          BEGIN
-            Error := TRUE;
-            WRITELN('Error: Multiple letters have the same cipher.') 
-          END
-        ELSE
-          IF Ch1 = ' '
-          THEN
-            SpaceSymb := Ch3
-          ELSE
+          WHILE NOT EOLN(CodeTxt)
+          DO
             BEGIN
-              Error := TRUE;
-              WRITELN('Error: Invalid data format.') 
+              Ch1 := Ch2;
+              Ch2 := Ch3;
+              READ(CodeTxt, Ch3)
             END; 
-      READLN(CodeTxt);
-    END;
+          IF (Ch1 IN SymbArea) AND (Ch2 = '=') AND NOT (Ch3 IN UsedChar) AND (Ch3 IN CodeArea)
+          THEN
+            BEGIN
+              Code[Ch3] := Ch1;
+              UsedChar := UsedChar + [Ch3]
+            END 
+          ELSE
+            IF (Ch1 IN SymbArea) AND (Ch3 IN UsedChar)
+            THEN
+              BEGIN
+                Error := TRUE;
+                WRITELN('Error: Multiple letters have the same cipher.') 
+              END
+            ELSE
+              IF Ch2 <> '='
+              THEN
+                BEGIN
+                  Error := TRUE;
+                  WRITELN('Error: Invalid data format.') 
+                END;
+      END;     
+      READLN(CodeTxt)
+    END
 END; {Initialize}
  
-PROCEDURE Decode(VAR S: Str; VAR CurrStrLen: StrLen);
-{Выводит символы из S, соответствующие символам-индексам из Code}
+PROCEDURE Decode(VAR S: Str; VAR CurrStrLen: StrLen; VAR Error: BOOLEAN);
 VAR
   Index: StrLen;
-  IndexSymb: SymbArea; 
 BEGIN {Decode}
   WRITE('Your message in decrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
-    IF S[Index] IN UsedChar
+    IF (S[Index] IN CodeArea) AND (Code[S[Index]] IN SymbArea)
     THEN
-      FOR IndexSymb := 'A' TO 'Z'
-      DO
-      BEGIN
-        IF Code[IndexSymb] = S[Index]
-        THEN
-          WRITE(IndexSymb)
-      END
+      WRITE(Code[S[Index]])
     ELSE
-      IF S[Index] = SpaceChiper
-      THEN
-        WRITE(' ')
-      ELSE
-        WRITE(S[Index]);
+      WRITE(S[Index]);
   WRITELN
 END; {Decode}
  
 BEGIN {Decryption}
   ASSIGN(ChiperTxt, 'Cipher.txt');
   RESET(ChiperTxt);
-  {Инициализировать Code}
-  Initialize(Code, ChiperTxt, SpaceChiper);         
-  WHILE NOT Error AND NOT EOF(INPUT)
+  Initialize(Code, ChiperTxt, Error);
+  WHILE NOT Error AND NOT EOF
   DO
     BEGIN
-      {читать строку в Msg и распечатать ее}
       WHILE NOT EOLN AND (I < Len)
       DO
         BEGIN
@@ -109,7 +92,7 @@ BEGIN {Decryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Decode(Msg, I);
+      Decode(Msg, I, Error);
       I := 0
     END
 END. {Decryption}

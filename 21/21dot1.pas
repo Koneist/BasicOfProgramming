@@ -4,6 +4,7 @@ PROGRAM Encryption(INPUT, OUTPUT);
 CONST
   Len = 20;
   SymbArea = ['A'..'Z', ' '];
+  CodeArea = [' ' .. 'Z'];
 TYPE
   StrLen = 0 .. Len;
   Str = ARRAY [StrLen] OF 'A' .. 'Z';
@@ -16,7 +17,7 @@ VAR
 PROCEDURE Initialize(VAR Code: Chiper);
 {Присвоить Code шифр замены}
 BEGIN {Initialize}
-  //Code['A'] := 'Z';
+  Code['A'] := 'Z';
   Code['B'] := 'Y';
   Code['C'] := 'X';
   Code['D'] := '#';
@@ -53,7 +54,7 @@ BEGIN {Encode}
   WRITE('Your message in encrypted form is: ');
   FOR Index := 1 TO CurrStrLen
   DO
-    IF (S[Index] IN SymbArea) AND (Code[S[Index]] IN [' ' .. '~'])
+    IF (S[Index] IN SymbArea) AND (Code[S[Index]] IN CodeArea)
     THEN
       WRITE(Code[S[Index]])
     ELSE

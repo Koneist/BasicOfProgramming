@@ -75,5 +75,5 @@ BEGIN
   THEN
     READ(Ch);
   Symbol := GetSymbolPreset(Ch);
-  WriteMatrixSymbol(Ch, Symbol);
+  WriteMatrixSymbol(Ch, Symbol)
 END.
