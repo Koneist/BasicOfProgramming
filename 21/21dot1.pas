@@ -1,13 +1,13 @@
 PROGRAM Encryption(INPUT, OUTPUT);
-{Переводит символы из INPUT в код согласно Chiper 
-  и печатает новые символы в OUTPUT}
+{РџРµСЂРµРІРѕРґРёС‚ СЃРёРјРІРѕР»С‹ РёР· INPUT РІ РєРѕРґ СЃРѕРіР»Р°СЃРЅРѕ Chiper 
+  Рё РїРµС‡Р°С‚Р°РµС‚ РЅРѕРІС‹Рµ СЃРёРјРІРѕР»С‹ РІ OUTPUT}
 CONST
   Len = 20;
   SymbArea = ['A'..'Z', ' '];
   CodeArea = [' ' .. 'Z'];
 TYPE
   StrLen = 0 .. Len;
-  Str = ARRAY [StrLen] OF 'A' .. 'Z';
+  Str = ARRAY [StrLen] OF ' ' .. 'Z';
   Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
@@ -15,7 +15,7 @@ VAR
   I: StrLen;
 
 PROCEDURE Initialize(VAR Code: Chiper);
-{Присвоить Code шифр замены}
+{РџСЂРёСЃРІРѕРёС‚СЊ Code С€РёС„СЂ Р·Р°РјРµРЅС‹}
 BEGIN {Initialize}
   Code['A'] := 'Z';
   Code['B'] := 'Y';
@@ -47,7 +47,7 @@ BEGIN {Initialize}
 END;  {Initialize}
  
 PROCEDURE Encode(VAR S: Str; VAR Code: Chiper; VAR CurrStrLen: StrLen);
-{Выводит символы из Code, соответствующие символам из S}
+{Р’С‹РІРѕРґРёС‚ СЃРёРјРІРѕР»С‹ РёР· Code, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ СЃРёРјРІРѕР»Р°Рј РёР· S}
 VAR
   Index: StrLen;
 BEGIN {Encode}
@@ -63,12 +63,12 @@ BEGIN {Encode}
 END; {Encode}
  
 BEGIN {Encryption}
-  {Инициализировать Code}
+  {РРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ Code}
   Initialize(Code);
   WHILE NOT EOF(INPUT)
   DO
     BEGIN
-      {читать строку в Msg и распечатать ее}
+      {С‡РёС‚Р°С‚СЊ СЃС‚СЂРѕРєСѓ РІ Msg Рё СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ РµРµ}
       WHILE NOT EOLN AND (I < Len)
       DO
         BEGIN

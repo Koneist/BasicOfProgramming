@@ -71,6 +71,7 @@ BEGIN
 END;
 
 BEGIN
+  Ch := ' ';
   IF NOT EOLN
   THEN
     READ(Ch);

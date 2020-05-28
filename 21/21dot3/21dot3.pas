@@ -5,7 +5,7 @@ CONST
   CodeArea = [' ' .. 'Z'];
 TYPE
   StrLen = 0 .. Len;
-  Str = ARRAY [StrLen] OF 'A' .. 'Z';
+  Str = ARRAY [StrLen] OF ' ' .. 'Z';
   Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
@@ -60,7 +60,7 @@ BEGIN {Initialize}
     END
 END; {Initialize}
  
-PROCEDURE Decode(VAR S: Str; VAR CurrStrLen: StrLen; VAR Error: BOOLEAN);
+PROCEDURE Decode(VAR S: Str; VAR CurrStrLen: StrLen);
 VAR
   Index: StrLen;
 BEGIN {Decode}
@@ -92,7 +92,7 @@ BEGIN {Decryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Decode(Msg, I, Error);
+      Decode(Msg, I);
       I := 0
     END
 END. {Decryption}

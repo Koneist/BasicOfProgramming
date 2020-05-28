@@ -36,6 +36,9 @@ IMPLEMENTATION
   VAR
     Ch1, Ch2, Ch3: CHAR;
   BEGIN {ReadMonth}
+    Ch1 := ' ';
+    Ch2 := ' ';
+    Ch3 := ' ';
     IF NOT EOLN(FIn)
     THEN
       READ(FIn, Ch1);

@@ -5,7 +5,7 @@ CONST
   CodeArea = [' ' .. 'Z'];
 TYPE
   StrLen = 0 .. Len;
-  Str = ARRAY [StrLen] OF 'A' .. 'Z';
+  Str = ARRAY [StrLen] OF ' ' .. 'Z';
   Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
@@ -60,7 +60,7 @@ BEGIN {Initialize}
     END
 END; {Initialize}
  
-PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen; VAR Error: BOOLEAN);
+PROCEDURE Encode(VAR S: Str; VAR CurrStrLen: StrLen);
 VAR
   Index: StrLen;
 BEGIN {Encode}
@@ -92,7 +92,7 @@ BEGIN {Encryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Encode(Msg, I, Error);
+      Encode(Msg, I);
       I := 0
     END
 END. {Encryption}
