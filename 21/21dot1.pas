@@ -65,6 +65,7 @@ END; {Encode}
 BEGIN {Encryption}
   {Инициализировать Code}
   Initialize(Code);
+  I := 0;
   WHILE NOT EOF(INPUT)
   DO
     BEGIN

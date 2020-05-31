@@ -71,10 +71,13 @@ BEGIN
 END;
 
 BEGIN
-  Ch := ' ';
   IF NOT EOLN
   THEN
-    READ(Ch);
-  Symbol := GetSymbolPreset(Ch);
-  WriteMatrixSymbol(Ch, Symbol)
+    BEGIN
+      READ(Ch);
+      Symbol := GetSymbolPreset(Ch);
+      WriteMatrixSymbol(Ch, Symbol)
+    END
+  ELSE
+    WRITELN('no character entered')
 END.

@@ -60,7 +60,7 @@ BEGIN {Initialize}
     END
 END; {Initialize}
  
-PROCEDURE Decode(VAR S: Str; VAR CurrStrLen: StrLen);
+PROCEDURE Decode(VAR S: Str; VAR Code: Chiper; VAR CurrStrLen: StrLen);
 VAR
   Index: StrLen;
 BEGIN {Decode}
@@ -79,6 +79,7 @@ BEGIN {Decryption}
   ASSIGN(ChiperTxt, 'Cipher.txt');
   RESET(ChiperTxt);
   Initialize(Code, ChiperTxt, Error);
+  I := 0;
   WHILE NOT Error AND NOT EOF
   DO
     BEGIN
@@ -92,7 +93,7 @@ BEGIN {Decryption}
       READLN;
       WRITELN;
       WRITELN('Line length is ', I);
-      Decode(Msg, I);
+      Decode(Msg, Code, I);
       I := 0
     END
 END. {Decryption}
