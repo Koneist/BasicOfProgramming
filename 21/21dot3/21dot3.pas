@@ -54,7 +54,7 @@ BEGIN {Initialize}
                 BEGIN
                   Error := TRUE;
                   WRITELN('Error: Invalid data format.') 
-                END;
+                END
       END;     
       READLN(CodeTxt)
     END
