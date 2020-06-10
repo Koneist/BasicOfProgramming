@@ -22,7 +22,7 @@ VAR
 BEGIN {Initialize}
   UsedChar := [];
   RESET(CodeTxt);
-  Error := FALSE
+  Error := FALSE;
   WHILE NOT EOF(CodeTxt) AND NOT Error
   DO
     BEGIN
