@@ -22,7 +22,8 @@ VAR
 BEGIN {Initialize}
   UsedChar := [];
   RESET(CodeTxt);
-  WHILE NOT EOF(CodeTxt)
+  Error := FALSE; 
+  WHILE NOT EOF(CodeTxt) AND NOT Error 
   DO
     BEGIN
       IF NOT EOLN(CodeTxt)
@@ -79,10 +80,10 @@ BEGIN {Encryption}
   ASSIGN(ChiperTxt, 'Cipher.txt');
   RESET(ChiperTxt);
   Initialize(Code, ChiperTxt, Error);
-  i := 0;
   WHILE NOT Error AND NOT EOF
   DO
     BEGIN
+      I := 0;
       WHILE NOT EOLN AND (I < Len)
       DO
         BEGIN
@@ -94,6 +95,5 @@ BEGIN {Encryption}
       WRITELN;
       WRITELN('Line length is ', I);
       Encode(Msg, Code, I);
-      I := 0
     END
 END. {Encryption}

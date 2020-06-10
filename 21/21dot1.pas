@@ -65,11 +65,11 @@ END; {Encode}
 BEGIN {Encryption}
   {Инициализировать Code}
   Initialize(Code);
-  I := 0;
   WHILE NOT EOF(INPUT)
   DO
     BEGIN
       {читать строку в Msg и распечатать ее}
+      I := 0;
       WHILE NOT EOLN AND (I < Len)
       DO
         BEGIN
@@ -81,7 +81,6 @@ BEGIN {Encryption}
       WRITELN;
       WRITELN('Line length is ', I);
       Encode(Msg, Code, I);
-      I := 0
     END
 END.  {Encryption}
 
