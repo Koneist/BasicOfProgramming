@@ -12,11 +12,11 @@ IMPLEMENTATION
     THEN
       ChToLower := 'e'
     ELSE
-      IF (Ch IN EngLowerSymb) OR (Ch IN RusLowerSymb)
+      IF Ch IN LowerSymb
       THEN
         ChToLower := Ch
       ELSE
-        IF (Ch IN EngUpperSymb) OR (Ch IN RusUpperSymb)
+        IF Ch IN UpperSymb
         THEN
           ChToLower := CHR(ORD(Ch) + ChToLowerRange)
   END; {ChToLower}

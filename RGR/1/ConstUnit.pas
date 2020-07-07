@@ -11,11 +11,9 @@ INTERFACE
   CONST
     FInRoute = 'Input.txt';
     FOutRoute = 'Output.txt';
-    RusUpperSymb = ['À'..'ß'];
-    RusLowerSymb = ['à'..'ÿ'];
-    EngUpperSymb = ['A'..'Z'];
-    EngLowerSymb = ['a'..'z'];
-    ValidCh = RusUpperSymb + RusLowerSymb + EngUpperSymb + EngLowerSymb + ['¨', '¸'];
+    UpperSymb = ['A'..'Z', 'À'..'ß', '¨'];
+    LowerSymb = ['a'..'z', 'à'..'ÿ', '¸'];
+    ValidCh = UpperSymb + LowerSymb;
     ChToLowerRange = 32;
 IMPLEMENTATION
 
