@@ -1,9 +1,9 @@
 PROGRAM CountWords(INPUT, OUTPUT);
 
 USES
+  ConstUnit,
   WordInitializationUnit,
-  WordSortUnit,
-  ConstUnit;
+  WordSortUnit;  
 
 VAR
   FIn, FOut: TEXT;
